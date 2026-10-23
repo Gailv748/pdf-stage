@@ -28,6 +28,7 @@
 ### 校验与提示
 
 - Android 安装包 2 178 906 字节，`sha256 = e27e5b2746a41968105c74bbfcfef82b76557c879c4915eae03c04ce98ae2127`；若大小明显不符说明下载被截断（此前「解析包时出现问题」即由此引起）。minSdk 21 / targetSdk 34，v1+v2+v3 签名。
+- Windows 安装包校验：`PDFStage-Setup-1.0.0-x64.exe` sha256 `d07fda18e2c4a0c0cc2079410ca02571fc1fd62a423defcbe3acc56384be4242`；`PDFStage-Setup-1.0.0-x86.exe` sha256 `bed18ab18b7c0f9d32d97de69d448a86735bfd78a5217b00751643a15d851d9f`。
 - Windows 安装包为 NSIS 3 生成的 32 位安装器（x64 版内置 64 位主程序），支持 Win7 及以上；系统若拦截，请选择「仍要运行」。
 - macOS 应用未签名，首次请右键 →「打开」，或 `xattr -cr "/Applications/PDF 展台.app"`。
 - Linux 解压后运行 `启动.sh`；个别发行版如提示沙箱错误，可加 `--no-sandbox`。
