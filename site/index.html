@@ -219,24 +219,26 @@
     <div class="sec-head reveal">
       <span class="eyebrow">下载</span>
       <h2>选择你的平台</h2>
-      <p class="lead">全部为便携包，解压即用；Android 为 arm64 + x86 通用安装包。文件托管在 GitHub Releases。</p>
+      <p class="lead">Windows 提供安装程序（推荐，带桌面/开始菜单快捷方式与卸载项）与免安装绿色版；macOS、Linux 为便携包；Android 为 arm64 + x86 通用安装包。文件托管在 GitHub Releases。</p>
     </div>
     <div class="dl-grid">
       <div class="dl reveal">
         <div class="dl-top">
           <div class="dl-ic"><svg viewBox="0 0 24 24"><path d="M3 5h8v6H3zM13 5h8v6h-8zM3 13h8v6H3zM13 13h8v6h-8z"/></svg></div>
-          <div><h3>Windows x64</h3><small>Win 10 / 11 · 约 95 MB</small></div>
+          <div><h3>Windows x64<span class="dl-badge">推荐</span></h3><small>Win 10 / 11 · 安装包 · 约 69 MB</small></div>
         </div>
-        <div class="file">PDFStage-Windows-x64-portable.zip</div>
-        <a class="btn btn-primary" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Windows-x64-portable.zip">下载</a>
+        <div class="file">PDFStage-Setup-1.0.0-x64.exe</div>
+        <a class="btn btn-primary" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Setup-1.0.0-x64.exe">下载安装包</a>
+        <div class="dl-alt"><a href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Windows-x64-portable.zip">或下载绿色版 .zip（95 MB）</a></div>
       </div>
       <div class="dl reveal">
         <div class="dl-top">
           <div class="dl-ic"><svg viewBox="0 0 24 24"><path d="M3 5h8v6H3zM13 5h8v6h-8zM3 13h8v6H3zM13 13h8v6h-8z"/></svg></div>
-          <div><h3>Windows x86</h3><small>Win 7 / 8 / 8.1 · 约 93 MB</small></div>
+          <div><h3>Windows x86<span class="dl-badge">推荐</span></h3><small>Win 7 / 8 / 8.1 · 安装包 · 约 65 MB</small></div>
         </div>
-        <div class="file">PDFStage-Windows-x86-portable.zip</div>
-        <a class="btn btn-ghost" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Windows-x86-portable.zip">下载</a>
+        <div class="file">PDFStage-Setup-1.0.0-x86.exe</div>
+        <a class="btn btn-primary" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Setup-1.0.0-x86.exe">下载安装包</a>
+        <div class="dl-alt"><a href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Windows-x86-portable.zip">或下载绿色版 .zip（93 MB）</a></div>
       </div>
       <div class="dl reveal">
         <div class="dl-top">
@@ -271,7 +273,8 @@
         <a class="btn btn-ghost" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Android-universal-v1.0.apk">下载</a>
       </div>
     </div>
-    <div class="notes">
+    <div class="notes" style="grid-template-columns:repeat(2,1fr)">
+      <div class="note"><b>Windows</b>：安装包默认装到 <code>Program Files</code>，自动创建桌面与开始菜单快捷方式；覆盖安装会先静默卸载旧版。</div>
       <div class="note"><b>macOS</b>：应用未签名，首次请右键 →「打开」，或执行 <code>xattr -cr "/Applications/PDF 展台.app"</code>。</div>
       <div class="note"><b>Linux</b>：解压后运行 <code>启动.sh</code>；个别发行版若提示沙箱错误，可加 <code>--no-sandbox</code>。</div>
       <div class="note"><b>Android</b>：需要 Android 5.0+，允许安装未知来源；安装包应为 2.18 MB，明显不符说明下载被截断。</div>

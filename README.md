@@ -32,14 +32,16 @@
 
 | 平台 | 文件 | 说明 |
 | --- | --- | --- |
-| Windows x64 | `PDFStage-Windows-x64-portable.zip` | Win 10 / 11 |
-| Windows x86 | `PDFStage-Windows-x86-portable.zip` | Win 7 / 8 / 8.1 |
+| Windows x64 | `PDFStage-Setup-1.0.0-x64.exe` | **安装程序**，Win 10 / 11，69 MB |
+| Windows x86 | `PDFStage-Setup-1.0.0-x86.exe` | **安装程序**，Win 7 / 8 / 8.1，65 MB |
+| Windows 绿色版 | `PDFStage-Windows-x64-portable.zip` / `-x86-portable.zip` | 免安装，解压即用 |
 | macOS Apple Silicon | `PDFStage-macOS-AppleSilicon.zip` | M1 / M2 / M3 / M4 |
 | macOS Intel | `PDFStage-macOS-Intel.zip` | x64 |
 | Linux x64 | `PDFStage-Linux-x64-portable.tar.gz` | 解压后运行 `启动.sh` |
 | Android | `PDFStage-Android-universal-v1.0.apk` | arm64 + x86 通用，Android 5.0+ |
 | 测试文档 | `PDFStage-Test-128pages.pdf` | 128 页 16:9 横屏性能测试 |
 
+> Windows 安装包使用 NSIS 3 制作：品牌化安装向导、桌面/开始菜单快捷方式、控制面板卸载项，覆盖安装会先静默卸载旧版。
 > macOS 未签名：首次右键 →「打开」，或 `xattr -cr "/Applications/PDF 展台.app"`。
 > Android 安装包约 2.18 MB，若明显不符说明下载被截断。
 
@@ -68,7 +70,8 @@ cd web && python3 -m http.server 8123
 ## 构建
 
 ```bash
-./windows/build.sh   # 产出 windows/dist/*.zip
+./windows/build.sh   # 产出 windows/dist/*.zip（绿色版）
+./windows/installer.sh   # 产出 windows/dist/PDFStage-Setup-*.exe（安装包）
 ./mac/build.sh       # 产出 mac/dist/*.zip
 ./linux/build.sh     # 产出 linux/dist/*.tar.gz
 ./android/build.sh   # 产出 android/dist/*.apk（含签名与 ZIP 完整性自检）
