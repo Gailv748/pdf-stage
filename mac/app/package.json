@@ -1,0 +1,9 @@
+{
+  "name": "pdf-stage",
+  "productName": "PDF展台",
+  "version": "1.0.0",
+  "description": "仿希沃视频展台界面的 PDF 阅读器",
+  "main": "main.js",
+  "author": "PDF Stage",
+  "license": "MIT"
+}

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PDF 展台 — 为课堂演示而生的 PDF 阅读器</title>
+<meta name="description" content="仿希沃视频展台的 PDF 阅读器：批注可画到页面外、橡皮跟随图标分段擦除、双页对比、128 页秒开。支持 Windows / macOS / Linux / Android。">
+<meta name="theme-color" content="#14161a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f9bff' stroke-width='1.8'%3E%3Crect x='4' y='3' width='16' height='18' rx='2'/%3E%3Cpath d='M8 8h8M8 12h8M8 16h5'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<!-- 导航 -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">
+      <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+      <b>PDF 展台</b><i>v1.0</i>
+    </a>
+    <nav class="nav-links">
+      <a href="#features">功能</a>
+      <a href="#detail">批注与橡皮</a>
+      <a href="#gallery">截图</a>
+      <a href="#download">下载</a>
+      <a href="promo.html">4K 宣传片</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="promo.html">看宣传片</a>
+      <a class="btn btn-primary btn-sm" href="#download">立即下载</a>
+    </div>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow">为课堂演示而生的 PDF 阅读器</span>
+      <h1>把视频展台的<em>手感</em><br>搬进 PDF</h1>
+      <p class="lead">横竖屏都完整显示，图标不再被裁切；批注可以画到页面外的空白处；橡皮擦到哪，就擦到哪。128 页横屏文档照样秒开、跟手翻页。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#download">
+          <svg viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
+          下载桌面版
+        </a>
+        <a class="btn btn-ghost" href="promo.html">
+          <svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg>
+          观看 4K 宣传片
+        </a>
+      </div>
+      <div class="hero-meta">
+        <span><svg viewBox="0 0 24 24"><path d="M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v4H4zM14 15h6v4h-6z"/></svg>Windows · macOS · Linux</span>
+        <span><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>Android 5.0+</span>
+        <span><svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 4.5-3.4 7-8 8-4.6-1-8-3.5-8-8V7z"/><path d="M9 12l2 2 4-4"/></svg>本地处理，不上传文件</span>
+      </div>
+    </div>
+    <div class="hero-shot">
+      <div class="frame"><img src="assets/shot-annotate.jpg" alt="PDF 展台批注界面" width="3840" height="2160"></div>
+      <div class="float-card b">
+        <svg viewBox="0 0 24 24"><path d="M4 20l4-1 10-10-3-3L5 16z"/><path d="M14 6l3 3"/></svg>
+        <span>批注可越界<small>页面外空白也能写</small></span>
+      </div>
+      <div class="float-card c">
+        <svg viewBox="0 0 24 24"><path d="M5 16l6-6 5 5-4 4H5z"/><path d="M14 5l4 4"/></svg>
+        <span>橡皮跟随图标<small>经过之处分段擦除</small></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数据 -->
+  <section class="stats reveal">
+    <div class="stats-in">
+      <div class="stat"><b>1.2<i>s</i></b><span>打开 128 页横屏文档</span></div>
+      <div class="stat"><b>20<i>ms</i></b><span>平均每页翻页渲染</span></div>
+      <div class="stat"><b>4<i>端</i></b><span>Windows / macOS / Linux / Android</span></div>
+      <div class="stat"><b>6<i>×</i></b><span>最大缩放，批注不糊</span></div>
+    </div>
+  </section>
+
+  <!-- 功能 -->
+  <section class="section" id="features">
+    <div class="sec-head reveal">
+      <span class="eyebrow">核心能力</span>
+      <h2>课堂上真正用得上的细节</h2>
+      <p class="lead">不是把网页塞进壳里，而是按展台的操作习惯重做了翻页、批注与擦除。</p>
+    </div>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h4M7 13h10M7 17h6"/></svg></div>
+        <h3>横竖屏都不裁切</h3>
+        <p>平板竖屏时工具条自动换行，图标完整显示；翻页器与缩放条随工具条高度动态让位，不再互相压住。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20l4-1 10-10-3-3L5 16z"/><path d="M14 6l3 3"/></svg></div>
+        <h3>批注可以画到页面外</h3>
+        <p>输入层覆盖整个窗格，笔迹能落在页边空白处；笔画按 PDF 坐标保存，缩放后位置依旧准确。</p>
+      </div>
+      <div class="card red reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 16l6-6 5 5-4 4H5z"/><path d="M14 5l4 4"/></svg></div>
+        <h3>橡皮图标所过即擦</h3>
+        <p>按住后出现圆形橡皮，擦除位置就是图标中心；命中的笔画被分段裁掉，而不是整条消失。</p>
+      </div>
+      <div class="card red reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h16"/><path d="M14 7l5 5-5 5"/></svg></div>
+        <h3>右滑清空全部批注</h3>
+        <p>点橡皮后，按钮上方出现「向右滑动擦除所有批注」，滑到底即清空，可撤销恢复。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="8" height="14" rx="1.5"/><rect x="13" y="5" width="8" height="14" rx="1.5"/></svg></div>
+        <h3>双页对比教学</h3>
+        <p>左右分栏显示相邻两页，各自独立批注、同步翻页；例题与解答同屏对照。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h7v7H4zM13 5h7v7h-7zM4 14h7v5H4zM13 14h7v5h-7z"/></svg></div>
+        <h3>128 页也不卡</h3>
+        <p>缩略图按可视区懒加载，翻页只渲染当前页；实测连续翻 10 页约 200ms。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></div>
+        <h3>导出带批注的 PDF</h3>
+        <p>把整份文档按页渲染，批注烧录进新 PDF；也可以只截图当前页发给学生。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.6"/></svg></div>
+        <h3>护眼与画面调节</h3>
+        <p>亮度、对比度、饱和度三档滑杆，加暖色护眼；只影响显示，不改变导出内容。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 4h12v16l-6-4-6 4z"/></svg></div>
+        <h3>书签与自动恢复</h3>
+        <p>书签、批注与阅读位置保存在本地；意外关闭再打开，仍回到原来的页面。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 详情 -->
+  <section class="section" id="detail">
+    <div class="split">
+      <div class="txt reveal">
+        <span class="eyebrow">批注</span>
+        <h2>页面之外，也能写</h2>
+        <p class="lead">讲解时常常需要在页边补充说明。批注层不再限制在页面矩形内，整个窗格都能落笔。</p>
+        <ul class="bullets">
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>笔迹以 PDF 原始坐标存储，缩放、适应宽度、双页对比都不会错位</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>五种笔色、三档粗细，切换即时生效</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>每一笔都可撤销，也可以一键清除当前页</li>
+        </ul>
+      </div>
+      <div class="shot reveal"><img src="assets/shot-annotate.jpg" alt="批注截图"></div>
+    </div>
+
+    <div class="split">
+      <div class="shot reveal"><img src="assets/shot-eraser.jpg" alt="橡皮擦截图"></div>
+      <div class="txt reveal">
+        <span class="eyebrow">橡皮</span>
+        <h2>擦到哪，就擦到哪</h2>
+        <p class="lead">按下橡皮后出现一个红色圆形图标，触屏时自动上移 46px，不会被手指挡住。擦除发生在图标中心，长笔画会被分成两段，缺口正好在图标经过的位置。</p>
+        <ul class="bullets">
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>分段裁剪，保留笔画其余部分，不会整条误删</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>滑动条悬浮在橡皮按钮上方，右滑到底清空全部批注</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>清空与擦除都进入撤销栈，误操作可回退</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="txt reveal">
+        <span class="eyebrow">对比与总览</span>
+        <h2>左右对照，一页不丢</h2>
+        <p class="lead">开启对比教学后自动左右分栏，左右两页可以分别批注。缩略图面板按需渲染，128 页也只需加载可视区域。</p>
+        <ul class="bullets">
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>示例与答案、原文与译文同屏对照</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>缩略图懒加载，打开 128 页文档约 1.2 秒</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>竖屏自动改为上下排列，不再挤压</li>
+        </ul>
+      </div>
+      <div class="shot reveal"><img src="assets/shot-compare.jpg" alt="双页对比截图"></div>
+    </div>
+  </section>
+
+  <!-- 画廊 -->
+  <section class="section" id="gallery">
+    <div class="sec-head reveal">
+      <span class="eyebrow">软件截图</span>
+      <h2>真实界面，没有渲染图</h2>
+      <p class="lead">以下均来自 4K 屏幕截图，点击可查看原图。</p>
+    </div>
+    <div class="gallery">
+      <div class="gitem g1 reveal"><img src="assets/shot-cover.jpg" alt="封面"><span>128 页横屏测试文档</span></div>
+      <div class="gitem g2 reveal"><img src="assets/shot-annotate.jpg" alt="批注"><span>批注</span></div>
+      <div class="gitem g3 reveal"><img src="assets/shot-eraser.jpg" alt="橡皮"><span>橡皮与右滑清空</span></div>
+      <div class="gitem g4 reveal"><img src="assets/shot-compare.jpg" alt="双页对比"><span>双页对比</span></div>
+      <div class="gitem g5 reveal"><img src="assets/shot-thumbs.jpg" alt="缩略图"><span>缩略图</span></div>
+      <div class="gitem g6 reveal"><img src="assets/shot-portrait.jpg" alt="竖屏平板"><span>竖屏不裁切</span></div>
+    </div>
+  </section>
+
+  <!-- 宣传片 -->
+  <section class="section" id="promo">
+    <div class="sec-head reveal">
+      <span class="eyebrow">4K 宣传片</span>
+      <h2>30 秒看完 PDF 展台</h2>
+      <p class="lead">3840×2160、60 帧逐帧渲染，画面里的每一个界面都是软件真实截图，不是渲染图。</p>
+    </div>
+    <div class="video-card reveal">
+      <video src="assets/promo-4k60.mp4" poster="assets/shot-thumbs.jpg" controls playsinline preload="metadata"></video>
+      <div class="video-bar">
+        <div class="tagline"><i></i>4K UHD · 60FPS · 31 秒 · H.264</div>
+        <a class="btn btn-ghost btn-sm" href="assets/promo-4k60.mp4" download>下载 4K 视频</a>
+        <a class="btn btn-ghost btn-sm" href="promo.html">逐帧在线版</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 下载 -->
+  <section class="section" id="download">
+    <div class="sec-head reveal">
+      <span class="eyebrow">下载</span>
+      <h2>选择你的平台</h2>
+      <p class="lead">全部为便携包，解压即用；Android 为 arm64 + x86 通用安装包。文件托管在 GitHub Releases。</p>
+    </div>
+    <div class="dl-grid">
+      <div class="dl reveal">
+        <div class="dl-top">
+          <div class="dl-ic"><svg viewBox="0 0 24 24"><path d="M3 5h8v6H3zM13 5h8v6h-8zM3 13h8v6H3zM13 13h8v6h-8z"/></svg></div>
+          <div><h3>Windows x64</h3><small>Win 10 / 11 · 约 95 MB</small></div>
+        </div>
+        <div class="file">PDFStage-Windows-x64-portable.zip</div>
+        <a class="btn btn-primary" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Windows-x64-portable.zip">下载</a>
+      </div>
+      <div class="dl reveal">
+        <div class="dl-top">
+          <div class="dl-ic"><svg viewBox="0 0 24 24"><path d="M3 5h8v6H3zM13 5h8v6h-8zM3 13h8v6H3zM13 13h8v6h-8z"/></svg></div>
+          <div><h3>Windows x86</h3><small>Win 7 / 8 / 8.1 · 约 89 MB</small></div>
+        </div>
+        <div class="file">PDFStage-Windows-x86-portable.zip</div>
+        <a class="btn btn-ghost" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Windows-x86-portable.zip">下载</a>
+      </div>
+      <div class="dl reveal">
+        <div class="dl-top">
+          <div class="dl-ic"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.7 0-1.6-.7-2.6-.7-1.4 0-2.7.8-3.4 2-1.4 2.5-.4 6.1 1 8.1.7 1 1.5 2.1 2.5 2 1-.1 1.3-.7 2.5-.7s1.5.6 2.5.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.1z"/><path d="M14.3 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.6.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2z"/></svg></div>
+          <div><h3>macOS Apple Silicon</h3><small>M1 / M2 / M3 / M4 · 约 86 MB</small></div>
+        </div>
+        <div class="file">PDFStage-macOS-AppleSilicon.zip</div>
+        <a class="btn btn-ghost" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-macOS-AppleSilicon.zip">下载</a>
+      </div>
+      <div class="dl reveal">
+        <div class="dl-top">
+          <div class="dl-ic"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.7 0-1.6-.7-2.6-.7-1.4 0-2.7.8-3.4 2-1.4 2.5-.4 6.1 1 8.1.7 1 1.5 2.1 2.5 2 1-.1 1.3-.7 2.5-.7s1.5.6 2.5.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.1z"/><path d="M14.3 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.6.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2z"/></svg></div>
+          <div><h3>macOS Intel</h3><small>x64 · 约 91 MB</small></div>
+        </div>
+        <div class="file">PDFStage-macOS-Intel.zip</div>
+        <a class="btn btn-ghost" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-macOS-Intel.zip">下载</a>
+      </div>
+      <div class="dl reveal">
+        <div class="dl-top">
+          <div class="dl-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 20h8M12 17v3"/></svg></div>
+          <div><h3>Linux x64</h3><small>AppImage 风格便携包 · 约 92 MB</small></div>
+        </div>
+        <div class="file">PDFStage-Linux-x64-portable.tar.gz</div>
+        <a class="btn btn-ghost" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Linux-x64-portable.tar.gz">下载</a>
+      </div>
+      <div class="dl reveal">
+        <div class="dl-top">
+          <div class="dl-ic"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
+          <div><h3>Android 通用</h3><small>arm64 + x86 · 约 2.2 MB</small></div>
+        </div>
+        <div class="file">PDFStage-Android-universal-v1.0.apk</div>
+        <a class="btn btn-ghost" href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Android-universal-v1.0.apk">下载</a>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="note"><b>macOS</b>：应用未签名，首次请右键 →「打开」，或执行 <code>xattr -cr "/Applications/PDF 展台.app"</code>。</div>
+      <div class="note"><b>Linux</b>：解压后运行 <code>启动.sh</code>；个别发行版若提示沙箱错误，可加 <code>--no-sandbox</code>。</div>
+      <div class="note"><b>Android</b>：需要 Android 5.0+，允许安装未知来源；安装包应为 2.18 MB，明显不符说明下载被截断。</div>
+    </div>
+    <div class="notes" style="grid-template-columns:1fr;margin-top:14px">
+      <div class="note">测试文档：<a href="https://github.com/Gailv748/pdf-stage/releases/latest/download/PDFStage-Test-128pages.pdf" style="color:var(--blue)">128 页 16:9 横屏性能测试 PDF</a> · 项目源码与问题反馈：<a href="https://github.com/Gailv748/pdf-stage" style="color:var(--blue)">GitHub 仓库</a></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-in">
+      <div>© 2026 PDF 展台 · 本地处理，不上传任何文档</div>
+      <div class="foot-links">
+        <a href="promo.html">4K 宣传片</a>
+        <a href="https://github.com/Gailv748/pdf-stage">GitHub</a>
+        <a href="https://github.com/Gailv748/pdf-stage/releases">全部版本</a>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<div class="lb" id="lb"><img alt="预览"></div>
+
+<script>
+(function(){
+  var lb = document.getElementById('lb');
+  document.querySelectorAll('.gitem').forEach(function(el){
+    el.addEventListener('click', function(){
+      lb.querySelector('img').src = el.querySelector('img').src;
+      lb.classList.add('on');
+    });
+  });
+  lb.addEventListener('click', function(){ lb.classList.remove('on'); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') lb.classList.remove('on'); });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('on'); });
+  }
+})();
+</script>
+</body>
+</html>

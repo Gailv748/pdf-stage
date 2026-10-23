@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PDF 展台 · 4K 宣传片</title>
+<meta name="description" content="PDF 展台 4K 60 帧宣传片：批注越界、橡皮跟手、双页对比、四端同源。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f9bff' stroke-width='1.8'%3E%3Crect x='4' y='3' width='16' height='18' rx='2'/%3E%3Cpath d='M8 8h8M8 12h8M8 16h5'/%3E%3C/svg%3E">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#000;overflow:hidden}
+  body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#fff}
+  #viewport{position:fixed;inset:0;background:#05070a;overflow:hidden}
+  #stage{
+    position:absolute;left:50%;top:50%;width:3840px;height:2160px;
+    transform-origin:center center;background:#0a0d12;overflow:hidden;
+  }
+  .bg-grid{
+    position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+    background-size:120px 120px;
+    mask-image:radial-gradient(ellipse at 50% 45%,#000 30%,transparent 78%);
+  }
+  .glow{position:absolute;border-radius:50%;filter:blur(160px);opacity:.3;pointer-events:none}
+  .glow.blue{width:1700px;height:1700px;background:#2f9bff;left:-500px;top:-500px}
+  .glow.red{width:1500px;height:1500px;background:#e5484d;right:-450px;bottom:-550px;opacity:.18}
+  .vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.62) 100%);pointer-events:none}
+
+  /* HUD */
+  .hud{position:absolute;left:0;right:0;top:0;height:190px;display:flex;align-items:flex-start;justify-content:space-between;padding:64px 90px;z-index:20;pointer-events:none}
+  .hud .brand{display:flex;align-items:center;gap:22px;font-size:38px;font-weight:700;letter-spacing:.5px;opacity:.9}
+  .hud .brand svg{width:52px;height:52px;stroke:#2f9bff;fill:none;stroke-width:1.6}
+  .hud .badge{display:flex;align-items:center;gap:16px;font-size:28px;color:#93a0ad}
+  .hud .badge b{color:#fff;font-weight:600}
+  .hud .badge .dot{width:10px;height:10px;border-radius:50%;background:#e5484d;box-shadow:0 0 18px #e5484d}
+
+  /* scenes */
+  .scene{position:absolute;inset:0;opacity:0;visibility:hidden;will-change:opacity}
+  .head{position:absolute;left:190px;top:210px;z-index:6}
+  .tag{display:inline-flex;align-items:center;gap:14px;font-size:28px;letter-spacing:5px;color:#2f9bff;font-weight:700;text-transform:uppercase}
+  .tag::before{content:"";width:46px;height:4px;background:#2f9bff;border-radius:4px}
+  .head h2{font-size:96px;font-weight:800;letter-spacing:-2px;margin-top:26px;line-height:1.12}
+  .head p{font-size:36px;color:#9aa4b0;margin-top:22px;letter-spacing:.5px}
+
+  .shot{position:absolute;left:50%;top:1280px;width:2760px;transform:translate(-50%,-50%);z-index:5;will-change:transform}
+  .shot .frame{border-radius:30px;overflow:hidden;border:2px solid rgba(255,255,255,.16);box-shadow:0 60px 160px rgba(0,0,0,.75),0 0 0 2px rgba(0,0,0,.4);background:#000}
+  .shot img{width:100%;display:block}
+
+  /* 1 开场 */
+  .s1 .bgshot{position:absolute;inset:-4%;z-index:1}
+  .s1 .bgshot img{width:100%;height:100%;object-fit:cover;filter:brightness(.42) saturate(.9)}
+  .s1 .overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,10,14,.94) 0%,rgba(8,10,14,.72) 52%,rgba(8,10,14,.35) 100%);z-index:2}
+  .intro{position:absolute;left:260px;top:600px;z-index:6}
+  .intro .k{font-size:30px;letter-spacing:8px;color:#8fbff0;font-weight:600}
+  .intro h1{font-size:236px;font-weight:850;letter-spacing:-8px;line-height:1;margin-top:26px;
+    background:linear-gradient(180deg,#fff 30%,#a9c7e4 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .intro .sub{font-size:44px;color:#c7d1db;margin-top:34px;letter-spacing:2px}
+  .intro .line{width:380px;height:8px;border-radius:8px;background:linear-gradient(90deg,#2f9bff,#7fd0ff);margin-top:44px}
+  .pills{display:flex;gap:18px;margin-top:52px}
+  .pills span{font-size:27px;color:#cfd8e2;padding:12px 26px;border:1.5px solid rgba(255,255,255,.18);border-radius:99px;background:rgba(255,255,255,.05)}
+
+  /* 2/3/4/5 标注 */
+  .callout{position:absolute;z-index:7;display:flex;align-items:center;gap:20px;font-size:30px;font-weight:600;padding:18px 30px;border-radius:18px;background:rgba(20,24,30,.92);border:1.5px solid rgba(255,255,255,.16);box-shadow:0 26px 60px rgba(0,0,0,.5)}
+  .callout i{width:16px;height:16px;border-radius:50%;background:#e5484d;box-shadow:0 0 18px rgba(229,72,77,.8);display:inline-block}
+  .callout.blue i{background:#2f9bff;box-shadow:0 0 18px rgba(47,155,255,.8)}
+  .callout small{display:block;color:#8e99a5;font-weight:400;font-size:22px;margin-top:2px}
+
+  /* 6 平台 */
+  .platforms{position:absolute;left:0;right:0;top:420px;display:flex;justify-content:center;gap:34px;z-index:6}
+  .pf{width:660px;height:390px;border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.018));border:1.5px solid rgba(255,255,255,.13);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+  .pf svg{width:96px;height:96px;stroke:#dfe7ef;fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+  .pf b{font-size:38px;font-weight:700}
+  .pf span{font-size:25px;color:#8e99a5}
+  .s6 .head{top:150px}
+  .s6 .note{position:absolute;left:0;right:0;top:910px;text-align:center;font-size:40px;color:#9aa4b0;z-index:6}
+
+  /* 7 结尾 */
+  .s7 .end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:6;text-align:center}
+  .s7 h2{font-size:140px;font-weight:850;letter-spacing:-4px}
+  .s7 .url{font-size:44px;color:#8fbff0;margin-top:34px;letter-spacing:1px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .s7 .meta{font-size:30px;color:#7f8b97;margin-top:26px}
+  .s7 .bar{width:900px;height:2px;background:rgba(255,255,255,.14);margin-top:60px;position:relative;overflow:hidden}
+  .s7 .bar::after{content:"";position:absolute;left:0;top:0;height:100%;width:0;background:#2f9bff;animation:none}
+
+  /* 进度与控制 */
+  .progress{position:absolute;left:0;right:0;bottom:0;height:8px;background:rgba(255,255,255,.09);z-index:30}
+  .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#2f9bff,#7fd0ff)}
+  #ctrl{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:14px;background:rgba(16,19,24,.82);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);transition:opacity .3s,transform .3s}
+  #ctrl button{width:40px;height:40px;border:0;border-radius:10px;background:rgba(255,255,255,.07);color:#dfe6ee;display:grid;place-items:center;cursor:pointer;transition:background .15s}
+  #ctrl button:hover{background:rgba(255,255,255,.14)}
+  #ctrl svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  #ctrl .t{font-size:12.5px;color:#9aa4b0;font-variant-numeric:tabular-nums;padding:0 6px;min-width:88px;text-align:center}
+  #ctrl .hint{font-size:12px;color:#68737f;padding:0 8px 0 2px}
+  body.rec #ctrl{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(14px)}
+  body.rec,body.rec *{cursor:none !important}
+  body.idle #ctrl{opacity:0;pointer-events:none}
+  @media (max-width:900px){ #ctrl .hint{display:none} }
+</style>
+</head>
+<body>
+<div id="viewport">
+  <div id="stage">
+    <div class="bg-grid"></div>
+    <div class="glow blue"></div>
+    <div class="glow red"></div>
+
+    <!-- 1 开场 -->
+    <section class="scene s1" data-start="0" data-end="4.6">
+      <div class="bgshot"><img src="assets/shot-cover.jpg" alt=""></div>
+      <div class="overlay"></div>
+      <div class="intro">
+        <div class="k" data-in="0">为课堂演示而生</div>
+        <h1 data-in="0.12">PDF 展台</h1>
+        <div class="sub" data-in="0.30">批注越界 · 橡皮跟手 · 双页对比 · 128 页秒开</div>
+        <div class="line" data-in="0.40"></div>
+        <div class="pills" data-in="0.50">
+          <span>Windows</span><span>macOS</span><span>Linux</span><span>Android</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 横屏 128 页 -->
+    <section class="scene s2" data-start="4.6" data-end="9.5">
+      <div class="head">
+        <div class="tag" data-in="0">横屏性能测试</div>
+        <h2 data-in="0.1">128 页，打开只要 1.2 秒</h2>
+        <p data-in="0.2">16:9 横屏 · 连续翻页约 20ms / 页</p>
+      </div>
+      <div class="shot" data-in="0.26"><div class="frame"><img src="assets/shot-thumbs.jpg" alt="128 页横屏文档与缩略图"></div></div>
+      <div class="callout blue" style="right:150px;top:250px" data-in="0.55"><i></i><span>缩略图懒加载<small>只渲染可视区域</small></span></div>
+    </section>
+
+    <!-- 3 批注 -->
+    <section class="scene s3" data-start="9.5" data-end="14.5">
+      <div class="head">
+        <div class="tag" data-in="0">批注</div>
+        <h2 data-in="0.1">页面之外，也能写</h2>
+        <p data-in="0.2">输入层覆盖整个窗格，页边空白同样可以落笔</p>
+      </div>
+      <div class="shot" data-in="0.24"><div class="frame"><img src="assets/shot-annotate.jpg" alt="页面外批注"></div></div>
+      <div class="callout" style="right:150px;top:300px" data-in="0.6"><i></i><span>笔画按 PDF 坐标保存<small>缩放后位置不变</small></span></div>
+    </section>
+
+    <!-- 4 橡皮 -->
+    <section class="scene s4" data-start="14.5" data-end="19.5">
+      <div class="head">
+        <div class="tag" data-in="0">橡皮</div>
+        <h2 data-in="0.1">擦到哪，就擦到哪</h2>
+        <p data-in="0.2">图标经过之处分段裁剪，长笔画不会被整条误删</p>
+      </div>
+      <div class="shot" data-in="0.24"><div class="frame"><img src="assets/shot-eraser.jpg" alt="橡皮擦除"></div></div>
+      <div class="callout" style="right:150px;top:270px" data-in="0.62"><i></i><span>右滑清空全部批注<small>滑动条就在橡皮按钮上方</small></span></div>
+    </section>
+
+    <!-- 5 对比 -->
+    <section class="scene s5" data-start="19.5" data-end="24.2">
+      <div class="head">
+        <div class="tag" data-in="0">对比教学</div>
+        <h2 data-in="0.1">左右对照，一页不丢</h2>
+        <p data-in="0.2">双页独立批注 · 翻页同步 · 竖屏自动上下排列</p>
+      </div>
+      <div class="shot" data-in="0.24"><div class="frame"><img src="assets/shot-compare.jpg" alt="双页对比"></div></div>
+    </section>
+
+    <!-- 6 四端 -->
+    <section class="scene s6" data-start="24.2" data-end="27.8">
+      <div class="head" style="left:0;right:0;text-align:center">
+        <div class="tag" data-in="0" style="justify-content:center">四端同源</div>
+        <h2 data-in="0.1">同一套体验，四个平台</h2>
+      </div>
+      <div class="platforms">
+        <div class="pf" data-in="0.25">
+          <svg viewBox="0 0 24 24"><path d="M3 5h8v6H3zM13 5h8v6h-8zM3 13h8v6H3zM13 13h8v6h-8z"/></svg>
+          <b>Windows</b><span>7 / 8 / 10 / 11 · x64 &amp; x86</span>
+        </div>
+        <div class="pf" data-in="0.35">
+          <svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.7 0-1.6-.7-2.6-.7-1.4 0-2.7.8-3.4 2-1.4 2.5-.4 6.1 1 8.1.7 1 1.5 2.1 2.5 2 1-.1 1.3-.7 2.5-.7s1.5.6 2.5.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.1z"/><path d="M14.3 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.6.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2z"/></svg>
+          <b>macOS</b><span>Apple Silicon &amp; Intel</span>
+        </div>
+        <div class="pf" data-in="0.45">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 20h8M12 17v3"/></svg>
+          <b>Linux</b><span>x64 便携包</span>
+        </div>
+        <div class="pf" data-in="0.55">
+          <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>
+          <b>Android</b><span>arm64 + x86 通用</span>
+        </div>
+      </div>
+      <div class="note" data-in="0.65">本地处理，不上传文档 · 无需联网</div>
+    </section>
+
+    <!-- 7 结尾 -->
+    <section class="scene s7" data-start="27.8" data-end="31.2">
+      <div class="end">
+        <div class="tag" data-in="0" style="justify-content:center">免费下载</div>
+        <h2 data-in="0.1">把展台搬回课堂</h2>
+        <div class="url" data-in="0.28">github.com/Gailv748/pdf-stage</div>
+        <div class="meta" data-in="0.38">Windows · macOS · Linux · Android　|　v1.0</div>
+        <div class="bar" data-in="0.5"></div>
+      </div>
+    </section>
+
+    <div class="vignette"></div>
+
+    <div class="hud">
+      <div class="brand">
+        <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        PDF 展台
+      </div>
+      <div class="badge"><span class="dot"></span><b>4K · 60FPS</b><span>·</span><span>30 秒</span></div>
+    </div>
+
+    <div class="progress"><i id="prog"></i></div>
+  </div>
+</div>
+
+<div id="ctrl">
+  <button id="pp" title="播放 / 暂停 (空格)"></button>
+  <span class="t" id="time">00:00 / 00:31</span>
+  <button id="replay" title="重播">
+    <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v5h5"/></svg>
+  </button>
+  <button id="fs" title="全屏 (F)">
+    <svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+  </button>
+  <span class="hint">空格暂停 · F 全屏</span>
+</div>
+
+<script>
+(function(){
+  var DUR = 31.2;
+  var stage = document.getElementById('stage');
+  var scenes = [].slice.call(document.querySelectorAll('.scene'));
+  var prog = document.getElementById('prog');
+  var timeEl = document.getElementById('time');
+  var pp = document.getElementById('pp');
+  var params = new URLSearchParams(location.search);
+  var record = params.get('record') === '1';
+  if (record) document.body.classList.add('rec');
+
+  var t = 0, playing = !record, last = 0;
+  if (params.has('t')) { t = Math.max(0, parseFloat(params.get('t')) || 0); playing = false; }
+
+  function clamp(v,a,b){ return v<a?a:v>b?b:v; }
+  function ease(x){ return 1 - Math.pow(1-x,3); }
+  function pad(n){ return (n<10?'0':'')+n; }
+
+  function fit(){
+    var s = Math.min(window.innerWidth/3840, window.innerHeight/2160);
+    stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit); fit();
+
+  var iconPlay = '<svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg>';
+  var iconPause = '<svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>';
+  pp.innerHTML = iconPause;
+
+  function render(tt){
+    scenes.forEach(function(sc){
+      var a = parseFloat(sc.dataset.start), b = parseFloat(sc.dataset.end);
+      var pre = 0.18, fadeOut = 0.26, op = 0;
+      var start = a === 0 ? 0 : a - pre;
+      if (tt >= start && tt <= b) {
+        op = Math.min((tt - start) / (a === 0 ? 0.70 : pre), 1);
+        if (b < DUR - 0.001) op = Math.min(op, (b - tt) / fadeOut);
+      }
+      op = clamp(op, 0, 1);
+      sc.style.opacity = op;
+      sc.style.visibility = op > 0.003 ? 'visible' : 'hidden';
+      if (op <= 0.003) return;
+
+      var p = clamp((tt - a) / (b - a), 0, 1);
+      sc.querySelectorAll('[data-in]').forEach(function(el){
+        var d = parseFloat(el.dataset.in) || 0;
+        var q = clamp((tt - (a - 0.25) - d) / 0.55, 0, 1);
+        var e = ease(q);
+        if (el.classList.contains('shot')) {
+          el.style.opacity = q;
+          el.style.transform = 'translate(-50%,-50%) translateY(' + ((1-e)*70).toFixed(1) + 'px) scale(' + (1 + 0.032*p).toFixed(4) + ')';
+        } else {
+          el.style.opacity = q;
+          el.style.transform = 'translateY(' + ((1-e)*46).toFixed(1) + 'px)';
+        }
+      });
+    });
+    prog.style.width = (tt / DUR * 100).toFixed(2) + '%';
+    var s = Math.floor(tt), m = Math.floor(s/60);
+    timeEl.textContent = '00:' + pad(s%60) + ' / 00:31';
+  }
+
+  function setPlaying(on){
+    playing = on;
+    pp.innerHTML = on ? iconPause : iconPlay;
+  }
+  pp.onclick = function(){ setPlaying(!playing); if (playing) last = performance.now(); };
+  document.getElementById('replay').onclick = function(){ t = 0; render(t); setPlaying(true); last = performance.now(); };
+  document.getElementById('fs').onclick = function(){
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+  };
+  document.addEventListener('keydown', function(e){
+    if (e.code === 'Space') { e.preventDefault(); setPlaying(!playing); if (playing) last = performance.now(); }
+    if (e.key === 'f' || e.key === 'F') document.getElementById('fs').click();
+  });
+  var idleTimer = null;
+  document.addEventListener('mousemove', function(){
+    document.body.classList.remove('idle');
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function(){ document.body.classList.add('idle'); }, 2200);
+  });
+
+  function tick(now){
+    if (!last) last = now;
+    var dt = (now - last) / 1000; last = now;
+    if (playing) {
+      t += dt;
+      if (t >= DUR) t = 0;
+    }
+    render(t);
+    requestAnimationFrame(tick);
+  }
+  render(t);
+  requestAnimationFrame(tick);
+
+  /* 录制 / 外部控制：确定性时间轴 */
+  window.__duration = DUR;
+  window.__seek = function(sec){ t = clamp(sec, 0, DUR); render(t); };
+  window.__play = function(){ setPlaying(true); last = 0; };
+  window.__pause = function(){ setPlaying(false); };
+  window.__recording = record;
+})();
+</script>
+</body>
+</html>
