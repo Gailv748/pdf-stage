@@ -26,10 +26,12 @@ const URL = process.env.PROMO_URL || 'http://127.0.0.1:8124/promo.html?record=1'
   });
   const dur = await page.evaluate(() => window.__duration);
   const total = Math.round(dur * FPS);
-  console.log('duration', dur, 'fps', FPS, 'frames', total, '->', OUT);
+  const from = parseInt(process.argv[4] || '0', 10);
+  const to = Math.min(total, parseInt(process.argv[5] || String(total), 10));
+  console.log('duration', dur, 'fps', FPS, 'frames', total, 'range', from + '..' + (to - 1), '->', OUT);
 
   const t0 = Date.now();
-  for (let i = 0; i < total; i++) {
+  for (let i = from; i < to; i++) {
     const t = i / FPS;
     await page.evaluate(t => window.__seek(t), t);
     const file = path.join(OUT, 'f' + String(i).padStart(5, '0') + '.jpg');
