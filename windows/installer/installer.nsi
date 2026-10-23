@@ -45,6 +45,7 @@ VIAddVersionKey "LegalCopyright" "MIT License"
 !include "nsDialogs.nsh"
 !include "LogicLib.nsh"
 !include "FileFunc.nsh"
+!include "x64.nsh"
 
 ; ---------- 品牌外观 ----------
 !define MUI_ICON "icon.ico"
@@ -90,6 +91,10 @@ Var ChkStartup
 
 Function .onInit
   !if "${ARCH}" == "x64"
+    ${IfNot} ${RunningX64}
+      MessageBox MB_OK|MB_ICONSTOP "此安装包为 64 位版本，请在 64 位 Windows 上安装。$\r$\n32 位系统请下载 x86 版本安装包。"
+      Abort
+    ${EndIf}
     SetRegView 64
   !else
     SetRegView 32
