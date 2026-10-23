@@ -16,7 +16,7 @@
 
 | 平台 | 文件 |
 | --- | --- |
-| Windows x64 安装包（Win 10 / 11，推荐） | `PDFStage-Setup-1.0.0-x64.exe`（69 MB） |
+| Windows x64 安装包（Win 10 / 11，推荐） | `PDFStage-Setup-1.0.0-x64.exe`（68 MB） |
 | Windows x86 安装包（Win 7 / 8 / 8.1，推荐） | `PDFStage-Setup-1.0.0-x86.exe`（65 MB） |
 | Windows 绿色版 | `PDFStage-Windows-x64-portable.zip` / `PDFStage-Windows-x86-portable.zip` |
 | macOS Apple Silicon（M1–M4） | `PDFStage-macOS-AppleSilicon.zip` |
