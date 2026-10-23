@@ -14,7 +14,6 @@ android/build/
 # 截图与临时产物
 tools/shots/
 tools/dl/
-site/assets/promo-4k60.mp4
 
 # 签名相关
 *.idsig
