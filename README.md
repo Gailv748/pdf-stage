@@ -78,12 +78,7 @@ cd web && python3 -m http.server 8123
 
 ## 宣传片
 
-`site/promo.html` 是 3840×2160 的 HTML 宣传片，`?record=1` 关闭所有控件，`window.__seek(t)` 提供确定性时间轴，可逐帧导出后用 ffmpeg 合成 4K60 视频：
-
-```bash
-node tools/frames.js /tmp/promo-frames 60
-ffmpeg -framerate 60 -i /tmp/promo-frames/f%05d.jpg -c:v libx264 -crf 21 -pix_fmt yuv420p out.mp4
-```
+官网内置 4K 宣传片 `site/assets/promo-4k60.mp4`：3840×2160、60 fps、31.2 秒、1872 帧、H.264。宣传片的 HTML 舞台文件只保留在本地，不进仓库、也不部署到线上。
 
 ## 技术栈
 

@@ -20,3 +20,6 @@ tools/dl/
 
 # 本地发布暂存
 release-assets/
+
+# 宣传片 HTML 舞台仅本地保留，不进仓库
+site/promo.html

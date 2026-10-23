@@ -22,7 +22,8 @@ rm -rf "$DEPLOY"
 git worktree prune
 git worktree add -B gh-pages "$DEPLOY" >/dev/null
 find "$DEPLOY" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-cp -a site/. "$DEPLOY"/
+# 宣传片 HTML 不上线：只部署 index.html / styles.css / assets
+rsync -a --exclude 'promo.html' site/ "$DEPLOY"/
 touch "$DEPLOY/.nojekyll"
 (
   cd "$DEPLOY"
